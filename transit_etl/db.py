@@ -2,6 +2,7 @@ from contextlib import contextmanager
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+
 class Database(object):
     def __init__(self, connection_string):
         self.engine = create_engine(connection_string)
@@ -21,3 +22,6 @@ class Database(object):
             raise
         finally:
             s.close()
+
+
+
