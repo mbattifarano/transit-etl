@@ -23,10 +23,10 @@ def to_datetime(year, month, day, hour, minute, second=0):
 
 
 def split_concatenated_time(t):
-    hour = t[0:2]
-    minute = t[1:3]
+    hour = t[:2]
+    minute = t[2:]
     return hour, minute
 
 
 def format_block_id(block):
-    return '-'.join([block[0:3], block[2:5]])
+    return '-'.join([block[:3], block[3:]])
