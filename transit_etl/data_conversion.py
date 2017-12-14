@@ -11,8 +11,12 @@ def trim(s):
 
 
 def to_datetime(year, month, day, hour, minute, second=0):
-    offset = dt.timedelta(days=1) if hour == 25 else dt.timedelta(0)
-    hr = hour if hour < 25 else 1
+    if hour == 25:
+        offset = dt.timedelta(days=1)
+        hr = 1
+    else:
+        offset = dt.timedelta(0)
+        hr = hour
     try:
         day = dt.date(year, month, day) + offset
         time = dt.time(hr, minute, second)
@@ -25,7 +29,7 @@ def to_datetime(year, month, day, hour, minute, second=0):
 def split_concatenated_time(t):
     hour = t[:2]
     minute = t[2:]
-    return hour, minute
+    return int(hour), int(minute)
 
 
 def format_block_id(block):

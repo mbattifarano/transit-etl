@@ -109,6 +109,8 @@ class ApcAvlRecord(Base):
     trip = Column(String(64))  # not compatible ids
     block = Column(String(64), index=True)  # needs hyphen
     stop = Column(Integer, index=True)
+    stop_name = Column(String(128))
+    stop_code = Column(String(64), index=True)
     vehicle_id = Column(Integer)
     arrival_time = Column(DateTime)
     departure_time = Column(DateTime)

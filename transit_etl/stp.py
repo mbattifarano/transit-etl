@@ -35,7 +35,7 @@ fields = [FieldSpec(*data) for data in [
     ('dl_passenger_miles', 145, 8, float),
     ('dwell_time', 211, 6, float),
     ('gps_delta', 125, 5, int),
-    ('scheduled_arrival', 175, 5, str),
+    ('scheduled_arrival', 175, 5, dc.trim),
     ('schedule_deviation', 204, 7, float),
     ('schedule_traveltime', 180, 6, float),
     ('actual_traveltime', 186, 6, float)
@@ -94,6 +94,8 @@ def to_model(data):
         trip=data.trip,
         block=dc.format_block_id(data.block),
         stop=data.stop,
+        stop_name=data.name,
+        stop_code=data.qstop,
         vehicle_id=data.vehicle_id,
         arrival_time=dc.to_datetime(data.year, data.month, data.day,
                                     data.arrival_hour, data.arrival_minute, data.arrival_second),
@@ -103,7 +105,7 @@ def to_model(data):
         alighting=data.off,
         load=data.load,
         scheduled_arrival=dc.to_datetime(data.year, data.month, data.day,
-                                         *map(int, dc.split_concatenated_time(data.scheduled_arrival))),
+                                         *dc.split_concatenated_time(data.scheduled_arrival)),
         predicted_travel_time=data.schedule_traveltime,
         actual_travel_time=data.actual_traveltime
     )
